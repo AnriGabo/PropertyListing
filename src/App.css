@@ -1,0 +1,27 @@
+*::before,
+*::after,
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/*რეალურად გვაქვს დაყოფილი ორი ჰორიზონტალრუი შრე
+/* 3 ვერტიკალური შრე, 3 გრიდ კონტეინერისთვის */
+
+/* პირველ ჰორიზონტალურ შრეზე იქნება ფოტო განთავსებულ */
+/* ქვევით იქნეაბ უვკე უშუალოდ კონტეინერები ჩალაგებული */
+
+.All__Wrapper {
+  display: grid;
+  grid-template-areas:
+    "background background background"
+    "main main main";
+  grid-template-rows: 35rem 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+body,
+html {
+  background-color: #0c2340;
+}
