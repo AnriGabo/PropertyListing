@@ -1,6 +1,17 @@
 import { Box, Button, Stack } from "@mui/material";
+import { useState } from "react";
+import ReusableCard from "../cabinList/ReusableCard";
 
-const FilterBarList = () => {
+const   FilterBarList = () => {
+
+  const [country,setCountry] = useState("");
+  const [allCountry ,setAllCountry] = useState("");
+
+  
+  
+  // console.log(country);
+
+
   return (
     <Stack
       sx={{
@@ -11,7 +22,7 @@ const FilterBarList = () => {
       }}
     >
       <Box>
-        <Button
+        <Button onClick={() => setAllCountry("All")}
           variant="contained"
           sx={{
             textTransform: "capitalize",
@@ -23,7 +34,7 @@ const FilterBarList = () => {
         </Button>
       </Box>
       <Box>
-        <Button
+        <Button onClick={() => setCountry("Norway")}
           sx={{
             color: "white",
             textTransform: "capitalize",
@@ -35,7 +46,7 @@ const FilterBarList = () => {
         </Button>
       </Box>
       <Box>
-        <Button
+        <Button onClick={() => setCountry("Finland")}
           sx={{
             color: "white",
             textTransform: "capitalize",
@@ -47,7 +58,7 @@ const FilterBarList = () => {
         </Button>
       </Box>
       <Box>
-        <Button
+        <Button onClick={() => setCountry("Sweden")}
           sx={{
             color: "white",
             textTransform: "capitalize",
@@ -59,7 +70,7 @@ const FilterBarList = () => {
         </Button>
       </Box>
       <Box>
-        <Button
+        <Button onClick={() => setCountry("Switzerland")}
           sx={{
             color: "white",
             textTransform: "capitalize",
@@ -70,6 +81,7 @@ const FilterBarList = () => {
           Switzerland
         </Button>
       </Box>
+      <ReusableCard  chooseCountry={country} allCountry={allCountry}/>
     </Stack>
   );
 };

@@ -1,53 +1,56 @@
 import { Box, Divider, Stack, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
 
 import BedIcon from "@mui/icons-material/Bed";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import { useEffect, useState } from "react";
 
+// დატას ტიპების აღწერა
 type Cabin = {
-  id: string;
+  id: number;
   title: string;
   description: string;
   price: number;
   rating: number;
-  location: string;
   superhost: boolean;
+  location: string;
   capacity: {
     people: number;
     bedroom: number;
   };
   image: string;
+  chooseCountry: string;
+  allCountry:string
+};
+type ReusableCardProps = {
+  chooseCountry: string;
+  allCountry:string
 };
 
-const ReusableCard: React.FC = () => {
+const ReusableCard: React.FC = ({ chooseCountry,allCountry } : ReusableCardProps) => {
   const [cabinData, setCabinData] = useState<Cabin[]>([]);
+  console.log(chooseCountry + "working");
 
-  const fetchingCabinsList = async () => {
-    const Url =
-      "https://raw.githubusercontent.com/devchallenges-io/curriculum/refs/heads/main/4-frontend-libaries/challenges/group_1/data/property-listing-data.json";
+  const Url =
+    "https://raw.githubusercontent.com/devchallenges-io/curriculum/refs/heads/main/4-frontend-libaries/challenges/group_1/data/property-listing-data.json";
+
+  const fetchingData = async () => {
     try {
       const response = await fetch(Url);
-
-      if (!response.ok) {
-        throw new Error(`Failing to fetch data ${response.status}`);
-      }
-      const data = await response.json();
-      setCabinData(data);
-
-      // check if data really works
-      console.log(data);
+      const convertToJson = await response.json();
+      setCabinData(convertToJson);
     } catch (error) {
       console.log(error);
     }
   };
+
   useEffect(() => {
-    fetchingCabinsList();
+    fetchingData();
   }, []);
 
-  // Modify API DATA;
-  const modifyData = cabinData.map((item) => ({
-    ...item,
-  }));
+  const ModifyDat = cabinData.filter((Item) =>
+    Item.allCountry === allCountry ? Item.location : Item.location === chooseCountry
+  );
+  // ლოგიკა მოსაფიქრებელი ისეთი, რომ item-location თუ გაუტოლდება All-ს, ყველა დსრენდერდეს და თუ კნკრეტულს კონკრეტული
 
   return (
     <Stack
@@ -58,7 +61,8 @@ const ReusableCard: React.FC = () => {
         marginBlock: "3rem",
       }}
     >
-      {modifyData.map((Cabin) => (
+      {/* always use Key props */}
+      {ModifyDat.map((Cabin) => (
         <Box key={Cabin.id}>
           <Stack>
             <Box>
@@ -72,9 +76,8 @@ const ReusableCard: React.FC = () => {
               sx={{
                 border: "2px solid gray",
                 borderRadius: "0px 0px 10px 10px",
-                borderTop:"none",
+                borderTop: "none",
                 marginTop: "-0.288rem",
-                
               }}
             >
               <Box sx={{ paddingInlineStart: "2rem" }}>
@@ -123,14 +126,20 @@ const ReusableCard: React.FC = () => {
                   ></Divider>
                 </Box>
 
-                <Stack sx={{ flexDirection: "row", marginBlockStart: "1rem",marginBlockEnd:"1rem" }}>
+                <Stack
+                  sx={{
+                    flexDirection: "row",
+                    marginBlockStart: "1rem",
+                    marginBlockEnd: "1rem",
+                  }}
+                >
                   <Box sx={{ flex: 1 }}>
-                    <Typography sx={{ color: "white",fontSize:"1.1rem" }}>
+                    <Typography sx={{ color: "gray", fontSize: "1.1rem" }}>
                       ${Cabin.price} / night
                     </Typography>
                   </Box>
                   <Box sx={{ paddingInlineEnd: "2rem" }}>
-                    <Typography sx={{ color: "white" }}>
+                    <Typography sx={{ color: "gray" }}>
                       {Cabin.rating} 🌟
                     </Typography>
                   </Box>

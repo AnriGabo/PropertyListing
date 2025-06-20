@@ -15,8 +15,8 @@ const FilterBar = () => {
         marginTop: "-4rem",
       }}
     >
-      <FilterBarList />
     
+    <FilterBarList />
     </Stack>
   );
 };
