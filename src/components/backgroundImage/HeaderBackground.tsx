@@ -1,6 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
 import Cabin0 from "../../images/Cabin0.jpg";
-import FilterBar from "../filterBar/FilterBar";
 
 const HeaderBackground = () => {
   return (
@@ -50,7 +49,7 @@ const HeaderBackground = () => {
           </Typography>
         </Box>
       </Stack>
-      <FilterBar />
+      {/* აქ არუნდა რენდერდებოს */}
     </Stack>
   );
 };

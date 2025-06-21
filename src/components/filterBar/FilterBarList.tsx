@@ -1,18 +1,27 @@
 import { Box, Button, Stack } from "@mui/material";
-import { useState } from "react";
-import ReusableCard from "../cabinList/ReusableCard";
 
-const   FilterBarList = () => {
-
-  const [country,setCountry] = useState("");
-  const [allCountry ,setAllCountry] = useState("");
-
-  
-  
-  // console.log(country);
-
-
+interface chooseCountryProps {
+  chooseCountry: string;
+  updateCountry: React.Dispatch<React.SetStateAction<string>>;
+}
+const FilterBarList = ({
+  chooseCountry,
+  updateCountry,
+}: chooseCountryProps) => {
+  // როცა ღილაკს დააწვება ტიპი მინდა რომ აფდეითს აკეთებდეს და ეს updateCountry aris parrent setCountry
   return (
+    <Stack
+      sx={{
+        backgroundColor:"#00416A",
+        flexDirection: "row",
+        alignItems: "center",
+        paddingInline: "3.5rem",
+        borderRadius: "10px",
+        marginInline: "8rem",
+        zIndex: "1000",
+        marginTop: "-4rem",
+      }}
+    >
     <Stack
       sx={{
         flex: 1,
@@ -22,7 +31,8 @@ const   FilterBarList = () => {
       }}
     >
       <Box>
-        <Button onClick={() => setAllCountry("All")}
+        <Button
+          onClick={() => updateCountry("All")}
           variant="contained"
           sx={{
             textTransform: "capitalize",
@@ -34,7 +44,8 @@ const   FilterBarList = () => {
         </Button>
       </Box>
       <Box>
-        <Button onClick={() => setCountry("Norway")}
+        <Button
+          onClick={() => updateCountry("Norway")}
           sx={{
             color: "white",
             textTransform: "capitalize",
@@ -46,7 +57,8 @@ const   FilterBarList = () => {
         </Button>
       </Box>
       <Box>
-        <Button onClick={() => setCountry("Finland")}
+        <Button
+          onClick={() => updateCountry("Finland")}
           sx={{
             color: "white",
             textTransform: "capitalize",
@@ -58,7 +70,8 @@ const   FilterBarList = () => {
         </Button>
       </Box>
       <Box>
-        <Button onClick={() => setCountry("Sweden")}
+        <Button
+          onClick={() => updateCountry("Sweden")}
           sx={{
             color: "white",
             textTransform: "capitalize",
@@ -70,7 +83,8 @@ const   FilterBarList = () => {
         </Button>
       </Box>
       <Box>
-        <Button onClick={() => setCountry("Switzerland")}
+        <Button
+          onClick={() => updateCountry("Switzerland")}
           sx={{
             color: "white",
             textTransform: "capitalize",
@@ -81,9 +95,12 @@ const   FilterBarList = () => {
           Switzerland
         </Button>
       </Box>
-      <ReusableCard  chooseCountry={country} allCountry={allCountry}/>
+    </Stack>
     </Stack>
   );
 };
 
 export default FilterBarList;
+
+
+    

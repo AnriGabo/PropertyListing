@@ -19,17 +19,14 @@ type Cabin = {
   };
   image: string;
   chooseCountry: string;
-  allCountry:string
+  allCountry: string;
 };
 type ReusableCardProps = {
   chooseCountry: string;
-  allCountry:string
 };
 
-const ReusableCard: React.FC = ({ chooseCountry,allCountry } : ReusableCardProps) => {
+const ReusableCard: React.FC = ({ chooseCountry }: ReusableCardProps) => {
   const [cabinData, setCabinData] = useState<Cabin[]>([]);
-  console.log(chooseCountry + "working");
-
   const Url =
     "https://raw.githubusercontent.com/devchallenges-io/curriculum/refs/heads/main/4-frontend-libaries/challenges/group_1/data/property-listing-data.json";
 
@@ -47,10 +44,17 @@ const ReusableCard: React.FC = ({ chooseCountry,allCountry } : ReusableCardProps
     fetchingData();
   }, []);
 
-  const ModifyDat = cabinData.filter((Item) =>
-    Item.allCountry === allCountry ? Item.location : Item.location === chooseCountry
+  const ModifyDat = cabinData.filter(
+    // როცა ვიყენებთ "ან" მეთოდს, ერთ ერთი მხაარე რომც იყოს true, ბრუნდება true
+    // მომხმარებელი ფილტრის ბარში აჭერს ხელს allItem
+    // state saved this button
+    // გადაეცემა props
+    // chooseCountry === "All" და აბრუნებს true, და როცა filterbarში არსის true,აბრუნებს ყველა ელემენტს ახალ მასივში
+    // და ხდება ყველა ელემენტის დარენდერება
+
+    (Item) => chooseCountry === "All" || Item.location === chooseCountry
   );
-  // ლოგიკა მოსაფიქრებელი ისეთი, რომ item-location თუ გაუტოლდება All-ს, ყველა დსრენდერდეს და თუ კნკრეტულს კონკრეტული
+  console.log(ModifyDat);
 
   return (
     <Stack
