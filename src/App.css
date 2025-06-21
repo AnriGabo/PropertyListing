@@ -15,10 +15,12 @@
 .All__Wrapper {
   display: grid;
   grid-template-areas:
-    "background background background"
-    "main main main";
-  grid-template-rows: 35rem 1fr;
-  grid-template-columns: 1fr 1fr 1fr;
+    "background"
+    "filter"
+    "cardRender"
+    ;
+  grid-template-rows: 35rem 5rem 1fr;
+  grid-template-columns: 1fr;
 }
 
 body,

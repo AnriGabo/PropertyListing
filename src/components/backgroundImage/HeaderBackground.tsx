@@ -49,7 +49,6 @@ const HeaderBackground = () => {
           </Typography>
         </Box>
       </Stack>
-      {/* აქ არუნდა რენდერდებოს */}
     </Stack>
   );
 };

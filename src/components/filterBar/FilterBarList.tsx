@@ -1,11 +1,9 @@
 import { Box, Button, Stack } from "@mui/material";
 
 interface chooseCountryProps {
-  chooseCountry: string;
   updateCountry: React.Dispatch<React.SetStateAction<string>>;
 }
 const FilterBarList = ({
-  chooseCountry,
   updateCountry,
 }: chooseCountryProps) => {
   // როცა ღილაკს დააწვება ტიპი მინდა რომ აფდეითს აკეთებდეს და ეს updateCountry aris parrent setCountry
